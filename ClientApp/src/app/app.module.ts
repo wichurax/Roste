@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
@@ -16,6 +16,9 @@ import { MatNativeDateModule } from '@angular/material';
 import { MatInputModule } from '@angular/material/input';
 import { MatCardModule } from '@angular/material/card';
 import { SharedComponentsModule } from "./shared-components/shared-components.module";
+
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
 @NgModule({
     declarations: [
@@ -34,6 +37,14 @@ import { SharedComponentsModule } from "./shared-components/shared-components.mo
             { path: 'counter', component: CounterComponent },
             { path: 'fetch-data', component: FetchDataComponent },
         ]),
+        TranslateModule.forRoot({
+            loader: {
+                provide: TranslateLoader,
+                useFactory: httpLoaderFactory,
+                deps: [HttpClient]
+            }
+        }),
+
         BrowserAnimationsModule,
         MatDatepickerModule,
         MatNativeDateModule,
@@ -45,4 +56,9 @@ import { SharedComponentsModule } from "./shared-components/shared-components.mo
     providers: [MatDatepickerModule],
     bootstrap: [AppComponent]
 })
+
 export class AppModule { }
+
+export function httpLoaderFactory(http: HttpClient) {
+    return new TranslateHttpLoader(http);
+}

@@ -5,11 +5,13 @@ import { FlexLayoutModule } from "@angular/flex-layout";
 import { MsCalendarHeaderComponent } from './calendar/ms-calendar-header/ms-calendar-header.component';
 import { MatIconModule } from "@angular/material/icon";
 import { MatButtonModule } from '@angular/material/button';
+import { MsCalendarContentComponent } from './calendar/ms-calendar-content/ms-calendar-content.component';
 
 @NgModule({
     declarations: [
         CalendarComponent,
-        MsCalendarHeaderComponent
+        MsCalendarHeaderComponent,
+        MsCalendarContentComponent
     ],
     imports: [
         CommonModule,

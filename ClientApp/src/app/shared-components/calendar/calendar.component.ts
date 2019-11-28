@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { TranslateService } from "./translate.service";
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
     selector: 'ms-calendar',
@@ -8,10 +8,8 @@ import { TranslateService } from "./translate.service";
 })
 export class CalendarComponent implements OnInit {
 
-    public translateService: TranslateService;
-
-    constructor() {
-        this.translateService = new TranslateService('pl');
+    constructor(private readonly  _translateService: TranslateService) {
+        this._translateService.setDefaultLang('pl');
     }
 
     ngOnInit() {
