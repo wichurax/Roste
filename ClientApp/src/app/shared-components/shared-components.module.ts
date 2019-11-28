@@ -6,6 +6,7 @@ import { MsCalendarHeaderComponent } from './calendar/ms-calendar-header/ms-cale
 import { MatIconModule } from "@angular/material/icon";
 import { MatButtonModule } from '@angular/material/button';
 import { MsCalendarContentComponent } from './calendar/ms-calendar-content/ms-calendar-content.component';
+import { MatGridListModule } from '@angular/material/grid-list';
 
 @NgModule({
     declarations: [
@@ -18,6 +19,7 @@ import { MsCalendarContentComponent } from './calendar/ms-calendar-content/ms-ca
         FlexLayoutModule,
         MatIconModule,
         MatButtonModule,
+        MatGridListModule
     ],
     exports: [
         CalendarComponent

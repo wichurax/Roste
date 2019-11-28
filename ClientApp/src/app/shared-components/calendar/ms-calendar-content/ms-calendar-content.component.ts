@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Day } from "../shared/classes/Day";
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
     selector: 'ms-calendar-content',
@@ -7,9 +9,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MsCalendarContentComponent implements OnInit {
 
+    public dayList: BehaviorSubject<Day> = new BehaviorSubject<Day>(null);
+
     constructor() { }
 
     public ngOnInit() {
+        let array = [new Day, new Day, new Day, new Day, new Day, new Day];
+        this.dayList.next(array);
     }
 
 }
