@@ -1,5 +1,5 @@
-<mat-grid-list cols="5" rowHeight="5:1">
+<mat-grid-list cols="7" rowHeight="7:7">
     <mat-grid-tile *ngFor="let day of dayList | async">
-        <div style="width:100%">1</div>
+        <ms-day [day]="day"></ms-day>
     </mat-grid-tile>
 </mat-grid-list>
