@@ -12,6 +12,6 @@ export class CalendarComponent implements OnInit {
         this._translateService.setDefaultLang('pl');
     }
 
-    ngOnInit() {
+    public ngOnInit() {
     }
 }

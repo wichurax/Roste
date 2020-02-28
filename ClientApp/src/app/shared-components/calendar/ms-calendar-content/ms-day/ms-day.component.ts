@@ -13,6 +13,10 @@ export class MsDayComponent implements OnInit {
     constructor() { }
 
     public ngOnInit() {
+
     }
 
+    public printDay() {
+        console.log("Clicked day is: " + this.day.value.getDate());
+    }
 }

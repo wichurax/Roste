@@ -9,31 +9,32 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class MsCalendarContentComponent implements OnInit {
 
+    private _daysInViewModel = 42;
+
     public dayList: BehaviorSubject<Array<Day>> = new BehaviorSubject<Array<Day>>(null);
 
     constructor() { }
 
     public ngOnInit() {
-        this.getDaysInMonth();
+        this.getDaysInCurrentMonth();
     }
 
-    private getDaysInMonth() {
+    private getDaysInCurrentMonth() {
 
         let daysInMonth = new Array<Day>();
         const nowDate = new Date();
+        debugger 
 
         const month = nowDate.getMonth();
         const year = nowDate.getFullYear();
-        const dayOfWeek = nowDate.getDay();
-        const daysInViewModel = 35;
+        const dayOfWeek = new Date(year, month, 0).getDay();
 
-        // that's why month + 1 -> https://developer.mozilla.org/pl/docs/Web/JavaScript/Referencje/Obiekty/Date/getMonth
-        const numberOfDaysInMonth = new Date(year, month + 1, 0).getDate();
+        const numberOfDaysInMonth = new Date(year, month +1, 0).getDate();
 
         let addedDays = 0;
 
         // adding some undefined 'Day' objects before actual Days (to fit number of fields in calendar view)
-        for (let day = 1; day < dayOfWeek; day++) {
+        for (let day = 0; day < dayOfWeek; day++) {
             daysInMonth.push(Day.empty());
             addedDays++;
         }
@@ -44,7 +45,7 @@ export class MsCalendarContentComponent implements OnInit {
         }
 
         // adding some undefined 'Day' objects after actual Days (to fit number of fields in calendar view)
-        for (let day = 0; day < (daysInViewModel - addedDays); day++) {
+        while (addedDays < this._daysInViewModel) {
             daysInMonth.push(Day.empty());
             addedDays++;
         }
