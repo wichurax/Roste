@@ -23,7 +23,6 @@ export class MsCalendarContentComponent implements OnInit {
 
         let daysInMonth = new Array<Day>();
         const nowDate = new Date();
-        debugger 
 
         const month = nowDate.getMonth();
         const year = nowDate.getFullYear();
@@ -35,7 +34,7 @@ export class MsCalendarContentComponent implements OnInit {
 
         // adding some undefined 'Day' objects before actual Days (to fit number of fields in calendar view)
         for (let day = 0; day < dayOfWeek; day++) {
-            daysInMonth.push(Day.empty());
+            daysInMonth.push(Day.createEmpty());
             addedDays++;
         }
 
@@ -46,7 +45,7 @@ export class MsCalendarContentComponent implements OnInit {
 
         // adding some undefined 'Day' objects after actual Days (to fit number of fields in calendar view)
         while (addedDays < this._daysInViewModel) {
-            daysInMonth.push(Day.empty());
+            daysInMonth.push(Day.createEmpty());
             addedDays++;
         }
 

@@ -1,11 +1,17 @@
-<div fxLayout fxLayoutAlign="space-between center">
-    <button mat-button>
+<div fxLayout fxLayoutAlign="space-between center" style="background: lightcoral; border-bottom: 1px solid darkgrey">
+    <button mat-button style="height: 40px">
         2019
         <mat-icon>keyboard_arrow_down</mat-icon>
     </button>
-    <div fxLayout fxLayoutGap="8px">
-        <mat-icon class="header-mat-icon">keyboard_arrow_left</mat-icon>
-        <mat-icon class="header-mat-icon">keyboard_arrow_right</mat-icon>
-        <mat-icon class="header-mat-icon">settings_applications</mat-icon>
+    <div>
+        <button mat-icon-button>
+            <mat-icon>keyboard_arrow_left</mat-icon>
+        </button>
+        <button mat-icon-button>
+            <mat-icon>keyboard_arrow_right</mat-icon>
+        </button>
+        <button mat-icon-button>
+            <mat-icon>settings_applications</mat-icon>
+        </button>
     </div>
 </div>

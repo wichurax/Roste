@@ -17,6 +17,7 @@ export class MsDayComponent implements OnInit {
     }
 
     public printDay() {
-        console.log("Clicked day is: " + this.day.value.getDate());
+        if (this.day.value !== undefined) 
+            console.log("Clicked day is: " + this.day.value.getDate());
     }
 }

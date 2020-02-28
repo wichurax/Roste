@@ -10,7 +10,11 @@ export class Day{
         return day;
     }
 
-    public static empty() {
+    public static createEmpty() {
         return new this;
+    }
+
+    public isEmpty() {
+        return this.value !== undefined;
     }
 }
