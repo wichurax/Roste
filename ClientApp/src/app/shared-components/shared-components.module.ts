@@ -8,6 +8,7 @@ import { MatButtonModule } from "@angular/material/button";
 import { MatIconModule } from '@angular/material/icon';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { MatMenuModule } from '@angular/material/menu';
 
 @NgModule({
     declarations: [
@@ -21,7 +22,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
         FlexLayoutModule,
         MatIconModule,
         MatButtonModule,
-        MatGridListModule
+        MatGridListModule,
+        MatMenuModule
     ],
     exports: [
         CalendarComponent

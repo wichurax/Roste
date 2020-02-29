@@ -1,0 +1,9 @@
+.mat-menu-content:not(:empty) {
+    min-width: 256px;
+    padding: 0 !important;
+}
+
+*:focus {
+    outline: none !important;
+    border: 0 !important;
+}

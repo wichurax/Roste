@@ -1,8 +1,15 @@
 <div fxLayout fxLayoutAlign="space-between center" style="background: lightcoral; border-bottom: 1px solid darkgrey">
-    <button mat-button style="height: 40px">
-        2019
+    <button mat-button style="height: 40px" [matMenuTriggerFor]="menu">
+        {{year}}
         <mat-icon>keyboard_arrow_down</mat-icon>
     </button>
+    <mat-menu #menu="matMenu">
+        <mat-grid-list cols="4" rowHeight="1:1">
+            <mat-grid-tile *ngFor="let year of years">
+                <button mat-button style="height: 100%" (click)="setYear(year)">{{year}}</button>
+            </mat-grid-tile>
+        </mat-grid-list>
+    </mat-menu>
     <div>
         <button mat-icon-button>
             <mat-icon>keyboard_arrow_left</mat-icon>
