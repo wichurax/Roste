@@ -10,17 +10,25 @@ export class MsCalendarHeaderComponent implements OnInit {
     @Input() year: number;
     @Input() month: string;
 
+    private _quantityOfYearsInGrid = 20;
+    public quantityOfColsInMatMenuGrid = 4;
+
     public years: Array<number> = [];
 
     constructor() { }
 
     public ngOnInit() {
-        for (var i = 0; i < 16; i++) {
-            this.years[i] = (this.year - 8 + i);
-        }
+        this.refreshYears();
     }
 
     public setYear(year: number) {
         this.year = year;
+        this.refreshYears();
+    }
+
+    private refreshYears() {
+        for (var i = 0; i < this._quantityOfYearsInGrid; i++) {
+            this.years[i] = (this.year - this.quantityOfColsInMatMenuGrid + i);
+        }
     }
 }

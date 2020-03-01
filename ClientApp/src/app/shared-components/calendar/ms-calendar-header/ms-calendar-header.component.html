@@ -3,10 +3,10 @@
         {{year}}
         <mat-icon>keyboard_arrow_down</mat-icon>
     </button>
-    <mat-menu #menu="matMenu">
-        <mat-grid-list cols="4" rowHeight="1:1">
-            <mat-grid-tile *ngFor="let year of years">
-                <button mat-button style="height: 100%" (click)="setYear(year)">{{year}}</button>
+    <mat-menu style="width: 350px !important" #menu="matMenu">
+        <mat-grid-list cols="{{quantityOfColsInMatMenuGrid}}" rowHeight="1:1">
+            <mat-grid-tile *ngFor="let year of years" style="min-width: 64px">
+                <button mat-button style="height: 100%; outline: none;" (click)="setYear(year)">{{year}}</button>
             </mat-grid-tile>
         </mat-grid-list>
     </mat-menu>
