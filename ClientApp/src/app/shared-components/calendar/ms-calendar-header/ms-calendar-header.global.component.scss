@@ -4,5 +4,10 @@
 
 .mat-menu-panel {
     max-width: none !important;
-    width: 258px;
+    width: 256px;
+}
+
+*:focus {
+    outline: none !important;
+    border: 0 !important;
 }

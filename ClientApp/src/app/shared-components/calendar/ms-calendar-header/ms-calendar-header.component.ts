@@ -7,11 +7,12 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class MsCalendarHeaderComponent implements OnInit {
 
-    @Input() year: number;
+    @Input() activeYear: number;
     @Input() month: string;
 
     private _quantityOfYearsInGrid = 20;
     public quantityOfColsInMatMenuGrid = 4;
+    public yearsShift = 0;
 
     public years: Array<number> = [];
 
@@ -22,13 +23,25 @@ export class MsCalendarHeaderComponent implements OnInit {
     }
 
     public setYear(year: number) {
-        this.year = year;
+        this.activeYear = year;
         this.refreshYears();
     }
 
     private refreshYears() {
         for (var i = 0; i < this._quantityOfYearsInGrid; i++) {
-            this.years[i] = (this.year - this.quantityOfColsInMatMenuGrid + i);
+            this.years[i] = (this.activeYear - this.quantityOfColsInMatMenuGrid - (this._quantityOfYearsInGrid * this.yearsShift) + i);
         }
+    }
+
+    public decrementYearsShift(event: any) {
+        event.stopPropagation();
+        this.yearsShift--;
+        this.refreshYears();
+    }
+
+    public incrementYearsShift(event: any) {
+        event.stopPropagation();
+        this.yearsShift++;
+        this.refreshYears();
     }
 }
