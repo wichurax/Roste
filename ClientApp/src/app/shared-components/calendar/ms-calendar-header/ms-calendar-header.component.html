@@ -1,20 +1,33 @@
 <div fxLayout fxLayoutAlign="space-between center" style="background: lightcoral; border-bottom: 1px solid darkgrey">
-    <button mat-button style="height: 40px" [matMenuTriggerFor]="menu">
-        {{activeYear}}
+    <button mat-button style="height: 40px"
+            [matMenuTriggerFor]="menu"
+            #menuTrigger="matMenuTrigger">
+        {{activeMonth}} {{activeYear}}
         <mat-icon>keyboard_arrow_down</mat-icon>
     </button>
 
     <!-- menu to change year in calendar -->
-    <mat-menu style="width: 350px !important" #menu="matMenu">
+    <mat-menu #menu="matMenu" (closed)="loadInitialDataForMenu()">
         <div fxLayoutAlign="space-between center">
-            <div>
+            <div *ngIf="setYearMenuViewActive">
                 <span style="padding: 0 16px; font-size: 14px; font-weight: bold">{{years[0]}} - {{years[15]}}</span>
             </div>
-            <div>
-                <button mat-icon-button (click)="incrementYearsShift($event)">
+            <div *ngIf="setYearMenuViewActive">
+                <button mat-icon-button (click)="decrementYearsShift($event)">
                     <mat-icon>keyboard_arrow_left</mat-icon>
                 </button>
-                <button mat-icon-button (click)="decrementYearsShift($event)">
+                <button mat-icon-button (click)="incrementYearsShift($event)">
+                    <mat-icon>keyboard_arrow_right</mat-icon>
+                </button>
+            </div>
+            <div *ngIf="!setYearMenuViewActive">
+                <span style="padding: 0 16px; font-size: 14px; font-weight: bold">{{activeYear}}</span>
+            </div>
+            <div *ngIf="!setYearMenuViewActive">
+                <button mat-icon-button (click)="decrementYear($event)">
+                    <mat-icon>keyboard_arrow_left</mat-icon>
+                </button>
+                <button mat-icon-button (click)="incrementYear($event)">
                     <mat-icon>keyboard_arrow_right</mat-icon>
                 </button>
             </div>
@@ -22,13 +35,24 @@
 
         <mat-divider></mat-divider>
 
-        <mat-grid-list cols="{{quantityOfColsInMatMenuGrid}}" rowHeight="9:6" [gutterSize]="0">
+        <mat-grid-list *ngIf="setYearMenuViewActive" cols="{{quantityOfColsInMatMenuGrid}}" rowHeight="9:6" [gutterSize]="0">
             <mat-grid-tile *ngFor="let year of years" style="min-width: 64px">
                 <button mat-button
                         [ngClass]="{'activeYear': (year === activeYear)}"
                         style="height: 100%; outline: none;"
-                        (click)="setYear(year)">
+                        (click)="setYear(year, $event)">
                     {{year}}
+                </button>
+            </mat-grid-tile>
+        </mat-grid-list>
+
+        <mat-grid-list *ngIf="!setYearMenuViewActive" cols="{{quantityOfColsInMatMenuGrid}}" rowHeight="9:6" [gutterSize]="0">
+            <mat-grid-tile *ngFor="let month of months" style="min-width: 64px">
+                <button mat-button
+                        [ngClass]="{'activeMonth': (month === activeMonth)}"
+                        style="height: 100%; outline: none;"
+                        (click)="setMonth(month)">
+                    {{month}}
                 </button>
             </mat-grid-tile>
         </mat-grid-list>
