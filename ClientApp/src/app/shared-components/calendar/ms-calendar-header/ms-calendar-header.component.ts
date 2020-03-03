@@ -1,8 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
-
-const monthShortNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
-    "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
-];
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Months } from "../shared/classes/Months";
 
 @Component({
     selector: 'ms-calendar-header',
@@ -13,6 +10,9 @@ export class MsCalendarHeaderComponent implements OnInit {
 
     @Input() activeYear: number;
     @Input() activeMonth: string;
+
+    @Output() onNewYearChosen: EventEmitter<number> = new EventEmitter<number>();
+    @Output() onNewMonthChosen: EventEmitter<string> = new EventEmitter<string>();
 
     private _quantityOfYearsInGrid = 20;
     private _quantityOfMonthsInYear = 12;
@@ -35,16 +35,20 @@ export class MsCalendarHeaderComponent implements OnInit {
         this.refreshYears();
         event.stopPropagation();
         this.setYearMenuViewActive = false;
+        this.onNewYearChosen.emit(this.activeYear);
     }
 
     public setMonth(month: string) {
         this.activeMonth = month;
-        setTimeout(() => this.setYearMenuViewActive = true, 300);
+        setTimeout(() => {
+            this.setYearMenuViewActive = true;
+            this.onNewMonthChosen.emit(this.activeMonth);
+        }, 300);
     }
 
     public loadMonths() {
         for (let i = 0; i < this._quantityOfMonthsInYear; i++) {
-            this.months[i] = monthShortNames[i];
+            this.months[i] = Months.getMonthShortName(i);
         }
     }
 

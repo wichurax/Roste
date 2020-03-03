@@ -1,4 +1,10 @@
 <div style="border: 1px solid darkgray; border-radius: 4px">
-    <ms-calendar-header [activeYear]="2020" [activeMonth]="'Jan'"></ms-calendar-header>
-    <ms-calendar-content></ms-calendar-content>
+    <ms-calendar-header [activeYear]="activeYear"
+                        [activeMonth]="activeMonthShortName"
+                        (onNewYearChosen)="this.setActiveYear($event)"
+                        (onNewMonthChosen)="this.setActiveMonth($event)">
+    </ms-calendar-header>
+    <ms-calendar-content [activeYear]="activeYear"
+                         [activeMonth]="activeMonth">
+    </ms-calendar-content>
 </div>

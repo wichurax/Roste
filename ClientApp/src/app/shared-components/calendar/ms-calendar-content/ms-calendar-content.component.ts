@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Day } from '../shared/classes/Day';
 import { BehaviorSubject } from 'rxjs';
 
@@ -9,7 +9,23 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class MsCalendarContentComponent implements OnInit {
 
+    @Input()
+    set activeYear(activeYear: number) {
+        this._activeYear = activeYear;
+        this.getDaysInCurrentMonth();
+    }
+    get activeYear() { return this._activeYear }
+
+    @Input()
+    set activeMonth(activeMonth: number) {
+        this._activeMonth = activeMonth;
+        this.getDaysInCurrentMonth();
+    }
+    get activeMonth() { return this._activeMonth }
+
     private _daysInViewModel = 42;
+    private _activeYear: number;
+    private _activeMonth: number;
 
     public dayList: BehaviorSubject<Array<Day>> = new BehaviorSubject<Array<Day>>(null);
 
@@ -22,13 +38,10 @@ export class MsCalendarContentComponent implements OnInit {
     private getDaysInCurrentMonth() {
 
         let daysInMonth = new Array<Day>();
-        const nowDate = new Date();
 
-        const month = nowDate.getMonth();
-        const year = nowDate.getFullYear();
-        const dayOfWeek = new Date(year, month, 0).getDay();
+        const dayOfWeek = new Date(this._activeYear, this._activeMonth, 0).getDay();
 
-        const numberOfDaysInMonth = new Date(year, month +1, 0).getDate();
+        const numberOfDaysInMonth = new Date(this._activeYear, this._activeMonth + 1, 0).getDate();
 
         let addedDays = 0;
 
@@ -39,7 +52,7 @@ export class MsCalendarContentComponent implements OnInit {
         }
 
         for (let day = 1; day <= numberOfDaysInMonth; day++) {
-            daysInMonth.push(Day.create(new Date(year, month, day)));
+            daysInMonth.push(Day.create(new Date(this._activeYear, this._activeMonth, day)));
             addedDays++;
         }
 
@@ -51,5 +64,4 @@ export class MsCalendarContentComponent implements OnInit {
 
         this.dayList.next(daysInMonth);
     }
-
 }
