@@ -1,5 +1,16 @@
-.header-mat-icon{
-    font-size: 32px;
+.calendar-header-body {
+    background: lightcoral;
+    border-bottom: 1px solid darkgrey;
+
+    .header-button {
+        height: 40px;
+    }
+}
+
+.menu-vital-info {
+    padding: 0 16px;
+    font-size: 14px;
+    font-weight: bold;
 }
 
 .activeYear {

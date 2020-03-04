@@ -1,16 +1,17 @@
-<div fxLayout fxLayoutAlign="space-between center" style="background: lightcoral; border-bottom: 1px solid darkgrey">
-    <button mat-button style="height: 40px"
+<div fxLayoutAlign="space-between center" class="calendar-header-body">
+    <button mat-button
             [matMenuTriggerFor]="menu"
-            #menuTrigger="matMenuTrigger">
+            #menuTrigger="matMenuTrigger"
+            class="header-button">
         {{activeMonthShortName}} {{activeYear}}
         <mat-icon>keyboard_arrow_down</mat-icon>
     </button>
 
-    <!-- menu to change year in calendar -->
+    <!-- menu to change year and month in calendar -->
     <mat-menu #menu="matMenu" (closed)="loadInitialDataForMenu()">
         <div fxLayoutAlign="space-between center">
             <div *ngIf="setYearMenuViewActive">
-                <span style="padding: 0 16px; font-size: 14px; font-weight: bold">{{years[0]}} - {{years[15]}}</span>
+                <span class="menu-vital-info">{{years[0]}} - {{years[15]}}</span>
             </div>
             <div *ngIf="setYearMenuViewActive">
                 <button mat-icon-button (click)="decrementYearsShift($event)">
@@ -21,7 +22,7 @@
                 </button>
             </div>
             <div *ngIf="!setYearMenuViewActive">
-                <span style="padding: 0 16px; font-size: 14px; font-weight: bold">{{activeYear}}</span>
+                <span class="menu-vital-info">{{activeYear}}</span>
             </div>
             <div *ngIf="!setYearMenuViewActive">
                 <button mat-icon-button (click)="decrementYear($event)">
@@ -39,7 +40,6 @@
             <mat-grid-tile *ngFor="let year of years" style="min-width: 64px">
                 <button mat-button
                         [ngClass]="{'activeYear': (year === activeYear)}"
-                        style="height: 100%; outline: none;"
                         (click)="setYear(year, $event)">
                     {{year}}
                 </button>
@@ -50,7 +50,6 @@
             <mat-grid-tile *ngFor="let month of months" style="min-width: 64px">
                 <button mat-button
                         [ngClass]="{'activeMonth': (month[1] === activeMonth)}"
-                        style="height: 100%; outline: none;"
                         (click)="setMonth(month[1])">
                     {{month[0]}}
                 </button>
