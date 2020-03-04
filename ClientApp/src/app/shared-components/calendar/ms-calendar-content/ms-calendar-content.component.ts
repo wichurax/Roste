@@ -40,7 +40,6 @@ export class MsCalendarContentComponent implements OnInit {
         let daysInMonth = new Array<Day>();
 
         const dayOfWeek = new Date(this._activeYear, this._activeMonth, 0).getDay();
-
         const numberOfDaysInMonth = new Date(this._activeYear, this._activeMonth + 1, 0).getDate();
 
         let addedDays = 0;

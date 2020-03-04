@@ -11,7 +11,6 @@ export class CalendarComponent implements OnInit {
 
     public activeYear: number;
     public activeMonth: number;
-    public activeMonthShortName: string;
 
     constructor(private readonly  _translateService: TranslateService) {
         this._translateService.setDefaultLang('pl');
@@ -21,15 +20,13 @@ export class CalendarComponent implements OnInit {
         let currentDate = new Date();
         this.activeYear = currentDate.getFullYear();
         this.activeMonth = currentDate.getMonth();
-        this.activeMonthShortName = Months.getMonthShortName(this.activeMonth);
     }
 
     public setActiveYear(newActiveYear: number) {
         this.activeYear = newActiveYear;
     }
 
-    public setActiveMonth(newActiveMonth: string) {
-        this.activeMonth = Months.getMonthIndexFromShortName(newActiveMonth);
-        this.activeMonthShortName = Months.getMonthShortName(this.activeMonth);
+    public setActiveMonth(newActiveMonth: number) {
+        this.activeMonth = newActiveMonth;
     }
 }

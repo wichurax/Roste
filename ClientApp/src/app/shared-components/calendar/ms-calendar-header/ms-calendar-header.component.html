@@ -2,7 +2,7 @@
     <button mat-button style="height: 40px"
             [matMenuTriggerFor]="menu"
             #menuTrigger="matMenuTrigger">
-        {{activeMonth}} {{activeYear}}
+        {{activeMonthShortName}} {{activeYear}}
         <mat-icon>keyboard_arrow_down</mat-icon>
     </button>
 
@@ -49,20 +49,22 @@
         <mat-grid-list *ngIf="!setYearMenuViewActive" cols="{{quantityOfColsInMatMenuGrid}}" rowHeight="9:6" [gutterSize]="0">
             <mat-grid-tile *ngFor="let month of months" style="min-width: 64px">
                 <button mat-button
-                        [ngClass]="{'activeMonth': (month === activeMonth)}"
+                        [ngClass]="{'activeMonth': (month[1] === activeMonth)}"
                         style="height: 100%; outline: none;"
-                        (click)="setMonth(month)">
-                    {{month}}
+                        (click)="setMonth(month[1])">
+                    {{month[0]}}
                 </button>
             </mat-grid-tile>
         </mat-grid-list>
     </mat-menu>
 
     <div>
-        <button mat-icon-button>
+        <button mat-icon-button
+                (click)="decrementMonth()">
             <mat-icon>keyboard_arrow_left</mat-icon>
         </button>
-        <button mat-icon-button>
+        <button mat-icon-button
+                (click)="incrementMonth()">
             <mat-icon>keyboard_arrow_right</mat-icon>
         </button>
         <button mat-icon-button>

@@ -9,20 +9,36 @@ import { Months } from "../shared/classes/Months";
 export class MsCalendarHeaderComponent implements OnInit {
 
     @Input() activeYear: number;
-    @Input() activeMonth: string;
+    @Input()
+    set activeMonth(activeMonth: number) {
+        if (activeMonth === -1) {
+            activeMonth = 11;
+            this.decrementYear();
+        }
+        if (activeMonth === 12) {
+            activeMonth = 0;
+            this.incrementYear();
+        }
+        this._activeMonth = activeMonth;
+        this.activeMonthShortName = Months.getMonthShortName(this._activeMonth);
+    }
+    get activeMonth() { return this._activeMonth}
 
     @Output() onNewYearChosen: EventEmitter<number> = new EventEmitter<number>();
-    @Output() onNewMonthChosen: EventEmitter<string> = new EventEmitter<string>();
+    @Output() onNewMonthChosen: EventEmitter<number> = new EventEmitter<number>();
 
+    private _activeMonth: number;
     private _quantityOfYearsInGrid = 20;
     private _quantityOfMonthsInYear = 12;
-    public quantityOfColsInMatMenuGrid = 4;
-    public yearsShift = 0;
-
-    public years: Array<number> = [];
-    public months: Array<string> = [];
 
     public setYearMenuViewActive = true;
+
+    public quantityOfColsInMatMenuGrid = 4;
+    public yearsShift = 0;
+    public activeMonthShortName: string;
+
+    public years: Array<number> = [];
+    public months: Array<[string, number]> = [];
 
     constructor() { }
 
@@ -38,7 +54,7 @@ export class MsCalendarHeaderComponent implements OnInit {
         this.onNewYearChosen.emit(this.activeYear);
     }
 
-    public setMonth(month: string) {
+    public setMonth(month: number) {
         this.activeMonth = month;
         setTimeout(() => {
             this.setYearMenuViewActive = true;
@@ -48,12 +64,12 @@ export class MsCalendarHeaderComponent implements OnInit {
 
     public loadMonths() {
         for (let i = 0; i < this._quantityOfMonthsInYear; i++) {
-            this.months[i] = Months.getMonthShortName(i);
+            this.months[i] = [Months.getMonthShortName(i), i];
         }
     }
 
     private refreshYears() {
-        for (var i = 0; i < this._quantityOfYearsInGrid; i++) {
+        for (let i = 0; i < this._quantityOfYearsInGrid; i++) {
             this.years[i] = (this.activeYear - this.quantityOfColsInMatMenuGrid + (this._quantityOfYearsInGrid * this.yearsShift) + i);
         }
     }
@@ -70,14 +86,26 @@ export class MsCalendarHeaderComponent implements OnInit {
         this.refreshYears();
     }
 
-    public incrementYear(event: any) {
+    public incrementYear(event?: any) {
         this.activeYear++;
-        event.stopPropagation();
+        if (event)
+            event.stopPropagation();
     }
 
-    public decrementYear(event: any) {
+    public decrementYear(event?: any) {
         this.activeYear--;
-        event.stopPropagation();
+        if (event)
+            event.stopPropagation();
+    }
+
+    public incrementMonth() {
+        this.activeMonth++;
+        this.onNewMonthChosen.emit(this.activeMonth);
+    }
+
+    public decrementMonth() {
+        this.activeMonth--;
+        this.onNewMonthChosen.emit(this.activeMonth);
     }
 
     public loadInitialDataForMenu() {
@@ -86,6 +114,6 @@ export class MsCalendarHeaderComponent implements OnInit {
             this.yearsShift = 0;
             this.refreshYears();
             this.loadMonths();
-        }, 300);
+        }, 200);
     }
 }
