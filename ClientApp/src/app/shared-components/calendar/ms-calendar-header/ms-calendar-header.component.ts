@@ -28,10 +28,11 @@ export class MsCalendarHeaderComponent implements OnInit {
     @Output() onNewMonthChosen: EventEmitter<number> = new EventEmitter<number>();
 
     private _activeMonth: number;
-    private _quantityOfYearsInGrid = 20;
     private _quantityOfMonthsInYear = 12;
 
     public setYearMenuViewActive = true;
+
+    public quantityOfYearsInGrid = 20;
 
     public quantityOfColsInMatMenuGrid = 4;
     public yearsShift = 0;
@@ -69,8 +70,8 @@ export class MsCalendarHeaderComponent implements OnInit {
     }
 
     private refreshYears() {
-        for (let i = 0; i < this._quantityOfYearsInGrid; i++) {
-            this.years[i] = (this.activeYear - this.quantityOfColsInMatMenuGrid + (this._quantityOfYearsInGrid * this.yearsShift) + i);
+        for (let i = 0; i < this.quantityOfYearsInGrid; i++) {
+            this.years[i] = (this.activeYear - this.quantityOfColsInMatMenuGrid + (this.quantityOfYearsInGrid * this.yearsShift) + i);
         }
     }
 

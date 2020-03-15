@@ -11,7 +11,7 @@
     <mat-menu #menu="matMenu" (closed)="loadInitialDataForMenu()">
         <div fxLayoutAlign="space-between center">
             <div *ngIf="setYearMenuViewActive">
-                <span class="menu-vital-info">{{years[0]}} - {{years[15]}}</span>
+                <span class="menu-vital-info">{{years[0]}} - {{years[quantityOfYearsInGrid -1]}}</span>
             </div>
             <div *ngIf="setYearMenuViewActive">
                 <button mat-icon-button (click)="decrementYearsShift($event)">
