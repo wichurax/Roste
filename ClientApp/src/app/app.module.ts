@@ -15,7 +15,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatInputModule } from '@angular/material/input';
 import { MatCardModule } from '@angular/material/card';
-import { SharedComponentsModule } from "./shared-components/shared-components.module";
+import { SharedComponentsModule } from './shared-components/shared-components.module';
 
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';

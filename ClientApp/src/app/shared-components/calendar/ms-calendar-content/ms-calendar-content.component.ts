@@ -10,18 +10,18 @@ import { BehaviorSubject } from 'rxjs';
 export class MsCalendarContentComponent implements OnInit {
 
     @Input()
-    set activeYear(activeYear: number) {
+    public set activeYear(activeYear: number) {
         this._activeYear = activeYear;
         this.getDaysInCurrentMonth();
     }
-    get activeYear() { return this._activeYear }
+    public get activeYear() { return this._activeYear }
 
     @Input()
-    set activeMonth(activeMonth: number) {
+    public set activeMonth(activeMonth: number) {
         this._activeMonth = activeMonth;
         this.getDaysInCurrentMonth();
     }
-    get activeMonth() { return this._activeMonth }
+    public get activeMonth() { return this._activeMonth }
 
     private _daysInViewModel = 42;
     private _activeYear: number;

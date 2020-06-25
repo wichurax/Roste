@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { Months } from "../shared/classes/Months";
+import { Months } from '../shared/classes/Months';
 
 @Component({
     selector: 'ms-calendar-header',
@@ -8,9 +8,10 @@ import { Months } from "../shared/classes/Months";
 })
 export class MsCalendarHeaderComponent implements OnInit {
 
-    @Input() activeYear: number;
     @Input()
-    set activeMonth(activeMonth: number) {
+    public activeYear: number;
+    @Input()
+    public set activeMonth(activeMonth: number) {
         if (activeMonth === -1) {
             activeMonth = 11;
             this.decrementYear();
@@ -22,10 +23,10 @@ export class MsCalendarHeaderComponent implements OnInit {
         this._activeMonth = activeMonth;
         this.activeMonthShortName = Months.getMonthShortName(this._activeMonth);
     }
-    get activeMonth() { return this._activeMonth}
+    public get activeMonth() { return this._activeMonth}
 
-    @Output() onNewYearChosen: EventEmitter<number> = new EventEmitter<number>();
-    @Output() onNewMonthChosen: EventEmitter<number> = new EventEmitter<number>();
+    @Output() public onNewYearChosen: EventEmitter<number> = new EventEmitter<number>();
+    @Output() public onNewMonthChosen: EventEmitter<number> = new EventEmitter<number>();
 
     private _activeMonth: number;
     private _quantityOfMonthsInYear = 12;
